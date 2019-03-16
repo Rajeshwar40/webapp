@@ -13,6 +13,15 @@ pipeline {
             }
         }
 
+
+	stage ('Source-Composition-Analysis') {
+	
+		steps {
+			sh 'bash owasp-dependency-check.sh'
+		}	
+	}
+
+
         stage ('Build') {
             steps {
                 sh 'mvn clean package'
