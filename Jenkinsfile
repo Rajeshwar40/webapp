@@ -17,7 +17,7 @@ pipeline {
 	stage ('Source-Composition-Analysis') {
 	
 		steps {
-			sh 'sudo bash owasp-dependency-check.sh'
+			sh 'bash owasp-dependency-check.sh'
 		}	
 	}
 
