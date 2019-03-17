@@ -14,19 +14,10 @@ pipeline {
         }
 	    
   stage('SAST') {
-    environment {
-        scannerHome = tool 'web1'
-    }
-
-    steps {
-        withSonarQubeEnv('web1') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
-    }
+   def mvnHome = tool name: 'maven, type: 'maven'
+	  withSonarQubeEnv('devopssecure') {
+		  sh 'mvn sonar:sonar'
+	  }
 }
 	    
 	    
