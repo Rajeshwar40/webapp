@@ -53,7 +53,6 @@ sh 'wget https://raw.githubusercontent.com/devopssecure/webapp/master/owasp-depe
 	    
 	    stage ('DAST') {
 		    steps {
-			sh 'docker volume rm $(docker volume ls -qf dangling=true)'
 			sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.245.203.229:8080/WebApp'    
 		    }
 	    }
