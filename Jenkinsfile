@@ -14,7 +14,7 @@ pipeline {
         }
 	    
   stage('SAST') {
-   def mvnHome = tool name: 'maven, type: 'maven'
+   def mvnHome = tool name: 'Maven, type: 'maven'
 	  withSonarQubeEnv('devopssecure') {
 		  sh 'mvn sonar:sonar'
 	  }
