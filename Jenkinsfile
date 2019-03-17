@@ -17,6 +17,7 @@ pipeline {
 	  steps {
 	  withSonarQubeEnv('devopssecure') {
 		  sh 'mvn sonar:sonar'
+		  sh 'ls -la target/sonar'
 	  }
 	  }
 }
