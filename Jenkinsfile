@@ -14,8 +14,10 @@ pipeline {
         }
 	    
   stage('SAST') {
+	  steps {
 	  withSonarQubeEnv('devopssecure') {
 		  sh 'mvn sonar:sonar'
+	  }
 	  }
 }
 	    
