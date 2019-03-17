@@ -15,11 +15,11 @@ pipeline {
 	    
   stage('SAST') {
     environment {
-        scannerHome = tool 'sonar'
+        scannerHome = tool 'web1'
     }
 
     steps {
-        withSonarQubeEnv('sonar') {
+        withSonarQubeEnv('web1') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
 
