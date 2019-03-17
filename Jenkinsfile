@@ -53,8 +53,11 @@ sh 'wget https://raw.githubusercontent.com/devopssecure/webapp/master/owasp-depe
 	    
 	    stage ('DAST') {
 		    steps {
-			sh 'docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.245.203.229:8080/WebApp'    
-		    }
+			    sshagent(['zap-ssh']) {
+				sh 'ssh ubuntu@34.220.207.21
+ "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.245.203.229:8080/WebApp"' 
+			    }
+			}
 	    }
     }
     
