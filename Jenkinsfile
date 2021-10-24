@@ -16,7 +16,9 @@ pipeline {
 	    stage ('Check-Git-Secrets') {
 		    steps {
 	        sh 'rm trufflehog || true'
-		sh 'docker pull gesellix/trufflehog'
+		sh 'docker pull bbvalabsci/gitsec-trufflehog'
+		sh 'docker run -ti -v/var/run/docker.sock:/var/run/docker.sock  -p8010:8010 -p9989:9989 bbvalabsci/gitsec'
+			    
 		sh 'docker run -t gesellix/trufflehog --json https://github.com/Rajeshwar40/webapp.git > trufflehog'
 		sh 'cat trufflehog'
 	    }
