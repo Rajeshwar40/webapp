@@ -13,27 +13,9 @@ pipeline {
             }
         }
 	    
-  stage('SAST') {
-	  steps {
-	  withSonarQubeEnv('devopssecure') {
-		  sh 'mvn sonar:sonar'
-		  sh 'cat target/sonar/report-task.txt'
-	  }
-	  }
-}
-	    
 	    
 
 
-	stage ('Source-Composition-Analysis') {
-	
-		steps {
-			sh 'rm owasp*'			
-sh 'wget https://raw.githubusercontent.com/devopssecure/webapp/master/owasp-dependency-check.sh'
-			sh 'chmod +x owasp-dependency-check.sh'			
-			sh 'bash owasp-dependency-check.sh'
-		}	
-	}
 
 
         stage ('Build') {
@@ -41,7 +23,7 @@ sh 'wget https://raw.githubusercontent.com/devopssecure/webapp/master/owasp-depe
                 sh 'mvn clean package'
             }
         }
-        
+          
       
 	stage ('Deploy-To-Tomcat') {
 		steps {
@@ -51,13 +33,7 @@ sh 'wget https://raw.githubusercontent.com/devopssecure/webapp/master/owasp-depe
 		}
 	}
 	    
-	    stage ('DAST') {
-		    steps {
-			    sshagent(['zap-ssh']) {
-				sh 'ssh -o StrictHostKeyChecking=no ubuntu@34.220.207.21 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://54.245.203.229:8080/WebApp"' 
-			    }
-			}
-	    }
+	   
     }
     
 }
