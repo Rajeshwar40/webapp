@@ -71,23 +71,7 @@ pipeline {
 			}
 		}    
 	
-	    stage ('Nikto Scan') {
-		    steps {
-			sh 'rm nikto-output.xml || true'
-			sh 'docker pull secfigo/nikto:latest'
-			sh 'docker run --user $(id -u):$(id -g) --rm -v $(pwd):/report -i secfigo/nikto:latest -h 13.232.224.209 -p 8080 -output /report/nikto-output.xml'
-			sh 'cat nikto-output.xml'   
-		    }
-	    }
-	    
-	    stage ('SSL Checks') {
-		    steps {
-			sh 'pip install sslyze==1.4.2'
-			sh 'python -m sslyze --regular 13.232.224.209:8080 --json_out sslyze-output.json'
-			sh 'cat sslyze-output.json'
-		    }
-	    }
-	    
+
 	   
     }
     
